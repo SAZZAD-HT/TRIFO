@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TrifoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BUS">
+          <Key>
+            <PropertyRef Name="Bus_id" />
+          </Key>
+          <Property Name="Bus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bus_CompanyName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Bus_number" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Case">
+          <Key>
+            <PropertyRef Name="Case_id" />
+          </Key>
+          <Property Name="Case_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_id" Type="int" Nullable="false" />
+          <Property Name="P_rank" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Area" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Case_type" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Case_time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fare">
+          <Key>
+            <PropertyRef Name="Route_id" />
+          </Key>
+          <Property Name="Route_id" Type="int" Nullable="false" />
+          <Property Name="START_END" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Police">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_username" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="p_password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="rank" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Area" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Case_Police">
+          <End Role="Police" Type="Self.Police" Multiplicity="1" />
+          <End Role="Case" Type="Self.Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Police">
+              <PropertyRef Name="P_id" />
+            </Principal>
+            <Dependent Role="Case">
+              <PropertyRef Name="P_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrifoModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BUS" EntityType="Self.BUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Case" EntityType="Self.Case" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fare" EntityType="Self.Fare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Police" EntityType="Self.Police" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Case_Police" Association="Self.FK_Case_Police">
+            <End Role="Police" EntitySet="Police" />
+            <End Role="Case" EntitySet="Case" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrifoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BUS">
+          <Key>
+            <PropertyRef Name="Bus_id" />
+          </Key>
+          <Property Name="Bus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bus_CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bus_number" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Case">
+          <Key>
+            <PropertyRef Name="Case_id" />
+          </Key>
+          <Property Name="Case_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_id" Type="Int32" Nullable="false" />
+          <Property Name="P_rank" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Case_type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Case_time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Police" Relationship="TrifoModel.FK_Case_Police" FromRole="Case" ToRole="Police" />
+        </EntityType>
+        <EntityType Name="Fare">
+          <Key>
+            <PropertyRef Name="Route_id" />
+          </Key>
+          <Property Name="Route_id" Type="Int32" Nullable="false" />
+          <Property Name="START_END" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Police">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_username" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="p_password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rank" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cases" Relationship="TrifoModel.FK_Case_Police" FromRole="Police" ToRole="Case" />
+        </EntityType>
+        <EntityContainer Name="TrifoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
+          <EntitySet Name="Buses" EntityType="Self.BUS" />
+          <EntitySet Name="Cases" EntityType="Self.Case" />
+          <EntitySet Name="Fares" EntityType="Self.Fare" />
+          <EntitySet Name="Police" EntityType="Self.Police" />
+          <AssociationSet Name="FK_Case_Police" Association="TrifoModel.FK_Case_Police">
+            <End Role="Police" EntitySet="Police" />
+            <End Role="Case" EntitySet="Cases" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Case_Police">
+          <End Type="TrifoModel.Police" Role="Police" Multiplicity="1" />
+          <End Type="TrifoModel.Case" Role="Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Police">
+              <PropertyRef Name="P_id" />
+            </Principal>
+            <Dependent Role="Case">
+              <PropertyRef Name="P_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrifoModelStoreContainer" CdmEntityContainer="TrifoEntities">
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="TrifoModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="TrifoModel.BUS">
+              <MappingFragment StoreEntitySet="BUS">
+                <ScalarProperty Name="Bus_id" ColumnName="Bus_id" />
+                <ScalarProperty Name="Bus_CompanyName" ColumnName="Bus_CompanyName" />
+                <ScalarProperty Name="Bus_number" ColumnName="Bus_number" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cases">
+            <EntityTypeMapping TypeName="TrifoModel.Case">
+              <MappingFragment StoreEntitySet="Case">
+                <ScalarProperty Name="Case_id" ColumnName="Case_id" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+                <ScalarProperty Name="P_rank" ColumnName="P_rank" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Case_type" ColumnName="Case_type" />
+                <ScalarProperty Name="Case_time" ColumnName="Case_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fares">
+            <EntityTypeMapping TypeName="TrifoModel.Fare">
+              <MappingFragment StoreEntitySet="Fare">
+                <ScalarProperty Name="Route_id" ColumnName="Route_id" />
+                <ScalarProperty Name="START_END" ColumnName="START_END" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Police">
+            <EntityTypeMapping TypeName="TrifoModel.Police">
+              <MappingFragment StoreEntitySet="Police">
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+                <ScalarProperty Name="P_username" ColumnName="P_username" />
+                <ScalarProperty Name="p_password" ColumnName="p_password" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
